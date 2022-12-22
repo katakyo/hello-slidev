@@ -728,10 +728,12 @@ https://github.com/katakyo/hello-slidev
 今回のスライド
 https://hello-slidev.vercel.app/
 
-## PDFなどに書き出す
-連番の画像ファイルやPDF形式での出力が可能です
-```
-$ slidev export
+## PDFに書き出す
+
+以下のコマンドでPDFへの書き出しが可能です
+
+```sh
+$ npm run export
 ```
 
 ---
