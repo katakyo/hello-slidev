@@ -249,7 +249,7 @@ background: https://source.unsplash.com/collection/94734566/1920x1080
 
 ---
 
-# 1.1 インストール方法
+# インストール方法
 <style>
 .language-sh span.line { /* bashのコード */
   margin-left: -40px; /* 左に40px移動して無理矢理行削除してます */
@@ -295,7 +295,7 @@ https://stackblitz.com/edit/slidev-9tnb8s?file=slides.md
 
 ---
 
-# 1.2 ディレクトリ構成
+# ディレクトリ構成
 
 <style>
 /* .language-bash  {  /* コードブロックの背景食をかえるCSS
@@ -307,8 +307,6 @@ https://stackblitz.com/edit/slidev-9tnb8s?file=slides.md
 </style>
 
 <div class="grid grid-cols-[50%,50%] gap-4"><div>
-
-project　作成後のディレクトリ構成
 
 ```bash {all|12}
 ./
@@ -327,22 +325,84 @@ project　作成後のディレクトリ構成
 
 ```
 
-</div><div>
+### インストール直後のディレクトリ構成
+基本的にはslides.mdを編集します
 
+</div>
+<div>
 
+```bash {all|8,10,12,16}
+./
+|-- .gitignore
+|-- .npmrc
+|-- README.md
+|-- components
+|   |-- Counter.vue
+|-- layouts
+|   |-- end.vue（最終スライドを書き換えるためのコンポーネント）
+|-- public
+|   |-- img(画像とかはここに入れます)
+|-- setup
+|   |-- windicss.ts（windiCSSを使えるようにする）
+|-- netlify.toml
+|-- package-lock.json
+|-- package.json
+|-- slides-export.pdf(PDFで出力したファイル)
+|-- slides.md
+|-- vercel.json
 
-</div></div>
+```
+
+### 追加で変更を加えたファイル
+
+</div>
+</div>
 
 ---
 
-# 1.3 slides.mdの記述方法
+ # WindiCSSの設定
+SlidevはtailwindCSSと互換のあるwindiCSSが使えます
+rootディレクトリに新たにsetupディレクトリを作成しwindicss.tsを記述します
+
+ ```ts
+import { defineWindiSetup } from '@slidev/types'
+
+// extending the builtin windicss configurations
+export default defineWindiSetup(() => ({
+  shortcuts: {
+    // custom the default background
+    'bg-main': 'bg-white text-[#181818] dark:bg-[#121212] dark:text-[#ddd]',
+  },
+  theme: {
+    extend: {
+      // fonts can be replaced here, remember to update the web font links in `index.html`
+      fontFamily: {
+        sans: 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+        mono: '"Fira Code", monospace',
+      },
+    },
+  },
+}))
+ ```
+
+---
+
+# slides.mdの記述方法
 
 <div class="grid grid-cols-[50%,50%] gap-4"><div>
 
-### slides.mdにmarkdownを記述することでスライドを作成します
-<br>
 
-### &#045;&#045;&#045; を書くとページが区切られます。
+## ページの追加
+
+slides.mdにmarkdownを記述することでスライドを作成します
+<br>
+&#045;&#045;&#045; を書くとページが区切られます。
+
+
+## フロントマター
+フロントマターと呼ばれる記述をするとpage追加ではなく，次のスライドのレイアウトを定義することができます
+
+
 </div>
 <div>
 <img src = "/page_add.png" alt="ページの追加" width="360" heigth="360">
@@ -350,9 +410,10 @@ project　作成後のディレクトリ構成
 </div>
 
 
+
 ---
 
-# 1.4 Markdown出力例
+# Markdown出力例
 
 <div class="grid grid-cols-[50%,50%] gap-4"><div>
 
@@ -399,7 +460,7 @@ project　作成後のディレクトリ構成
 
 ---
 
-# 1.5 リスト
+# リスト
 
 <div class="grid grid-cols-[50%,50%] gap-4"><div>
 
@@ -447,21 +508,31 @@ project　作成後のディレクトリ構成
 
 ---
 
-# 1.6 テーブル
+# テーブル
 
 テーブルが表示
-VScodeのTabel Formatterとかを使うと見やすくなりそうです
+VScodeのTabel Formatterとかを使うと便利そうです
 
-|    製品名     |  メーカー名   | 価格  |
-| ------------- | :-----------: | ----: |
-|               | right-aligned | $1600 |
-| col 2 is      |   centered    |   $12 |
-| zebra stripes |   are neat    |    $1 |
+| 製品名 | メーカー名 | 価格  |
+| ------ | :--------: | ----: |
+| A      |    D社     | 100円 |
+| B      |    E社     | 200円 |
+| C      |    F社     | 300円 |
+
+
+```html
+| 製品名 | メーカー名 | 価格  |
+| ------ | :--------: | ----: |
+| A      |    D社     | 100円 |
+| B      |    E社     | 200円 |
+| C      |    F社     | 300円 |
+```
+
 
 
 ---
 
-# 1.7 画像
+# 画像
 
 web上の画像も表示できます
 unsplashのサイトを使うとリロードするたびにランダムで画像が変わります。
@@ -490,7 +561,7 @@ unsplashのサイトを使うとリロードするたびにランダムで画像
 
 ---
 
-# 1.8 アイコン
+# アイコン
 
 
 [Icons | Slidev](https://sli.dev/guide/syntax.html#icons) に利用可能なアイコンの情報があります。
@@ -525,7 +596,7 @@ unsplashのサイトを使うとリロードするたびにランダムで画像
 
 ---
 
-# 1.9 ソースコードのシンタックスハイライト
+# ソースコードのシンタックスハイライト
 
 <style>
 .language-bash span.line { /* bashのコード */
@@ -534,7 +605,7 @@ unsplashのサイトを使うとリロードするたびにランダムで画像
 </style>
 
 行番号が表示されているのは `lineNumbers: true` のおかげです。<br>
-4行目以降がハイライトされているのは `{4-}` のおかげです。
+ハイライトを段階的に表示する場合は `{1-2|5|all}` のように書くと良いです
 
 <div class="grid grid-cols-[50%,50%] gap-4"><div>
 before
@@ -551,7 +622,7 @@ f.close()
 </div><div>
 after
 
-```python {4-}
+```python {1-2|5|all}
 import os
 test_path = os.path.join("data", "data-01.txt")
 
@@ -560,9 +631,17 @@ with open(test_path, "a", encoding="utf-8") as f:
 ```
 
 </div></div>
+
+## Monaco Editor
+スライド上からコードを書き換えることができます，ライブコーディング的な感じで見せると面白いかもです。
+
+```ts {monaco}
+console.log('HelloWorld')
+```
+
 ---
 
-# 1.10 LaTeX
+# LaTeX
 
 LaTexにも対応しているので数式をかっこよく書きたい場合に使えそうです。
 <br>例としてマクスウェル方程式を書いてます（意味はありません）
@@ -578,7 +657,7 @@ $\left\{\begin{array}{ll}{\nabla \cdot \boldsymbol{B}(t, \boldsymbol{x})} & {=0}
 
 ---
 
-# 1.11 Twitter
+# Twitter
 
 <style>
 .language-markdown span.line { /* markdownのコード */
@@ -603,11 +682,9 @@ $\left\{\begin{array}{ll}{\nabla \cdot \boldsymbol{B}(t, \boldsymbol{x})} & {=0}
 
 </div></div>
 
-参考になったよという方はぜひTwitterのフォローといいねをポチッとしていただけると喜びます。
-
 ---
 
-# 1.12 YouTube
+# YouTube
 
 実態はSPAなのでYouTube動画の埋め込みコード(HTML)を貼り付けて再生することも可能です。<br>
 スライド上で動画を再生可能！
@@ -623,7 +700,7 @@ $\left\{\begin{array}{ll}{\nabla \cdot \boldsymbol{B}(t, \boldsymbol{x})} & {=0}
 
 ---
 
-# 1.13 Flowchart diagrams
+# Mermaid記法
 
 [Mermaid記法](https://sli.dev/guide/syntax.html#diagrams) でさまざまなものを描画できます
 
@@ -644,22 +721,7 @@ gantt
 
 ---
 
-# 1.13 Flowchart diagrams
-
-[Mermaid記法](https://sli.dev/guide/syntax.html#diagrams) でさまざまなものを描画できます
-
-## 円グラフ
-
-```mermaid
-pie title ペットの数
-    "Dogs" : 386
-    "Cats" : 85
-    "Rats" : 15
-```
-
----
-
-# 1.13 Flowchart diagrams
+# Mermaid記法
 
 [Mermaid記法](https://sli.dev/guide/syntax.html#diagrams) でさまざまなものを描画できます
 ## 状態遷移図
@@ -680,13 +742,12 @@ stateDiagram
 Notionで記述できそうなものは大体描画できそう
 <br>https://dev.classmethod.jp/articles/mermaid-markdown-is-supported-in-notion/#toc-7
 
-
 ---
 
-## 1.11　コンポーネントの利用
+# コンポーネントの利用
 
 Vueのコンポーネントを作成し使うこともできます
-先程紹介したTwitterやYotubeもVueのcomponentです
+テンプレートのプロジェクトにはConterのcomponentが入っています
 <br>変数はグローバル変数（ページ番号）は定義できそうですが，スライド個別の変数は使えなさそうです
 
 
@@ -715,6 +776,24 @@ Check out [the guides](https://sli.dev/builtin/components.html) for more.
 
 ---
 
+# endを上書きする
+デフォルトの状態だと最後のスライドが固定になるため，layoutsの中にend.vueを作成し上書きする必要があります
+
+
+
+```html
+<template>
+  <div class="slidev-layout default">
+      <div class="text-center">
+        <img class="inline w-60" src="/profile.png">
+        <p class="text-4xl">ありがとうございました！</p>
+      </div>
+  </div>
+</template>
+```
+
+---
+
 # 共有方法
 
 ## デプロイする
@@ -738,7 +817,7 @@ $ npm run export
 
 ---
 
-## その他の機能
+# その他の機能
 時間があればデモします
 - webカメラ機能（プレゼンターモードから，webカメラを起動してスライドに重ねて表示できます）
 - 図形の書き込み
@@ -746,9 +825,15 @@ $ npm run export
 - ダークモードへの切り替え
 
 ---
-layout: cover
----
+# 最後に
+凝ったアニメーションやcomponentを作成するのは大変ですが，使い回しができそうということもあるので今後も積極的に使ってみようと思っています
 
-# ご清聴ありがとうございました。
+<center>
+<br>
+<br>
+<br>
 
-よいSlidevライフを！
+# 興味を持った方は是非使って見てください！
+
+</center>
+
